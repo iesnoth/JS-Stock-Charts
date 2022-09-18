@@ -12,7 +12,7 @@ async function main() {
     console.log(stocks)
 
     //puts the dates in ascending order
-    stocks.forEach(stock => stock.value.reverse())
+    stocks.forEach(stock => stock.values.reverse());
     //  TIME CHART
     new Chart(timeChartCanvas.getContext('2d'), {
         type: 'line',
@@ -34,20 +34,20 @@ async function main() {
         }
     });
 
-//     new Chart(highestPriceChartCanvas.getContext('2d'), {
-//         type: 'bar',
-//         data: {
-//             labels: stock.meta.symbol,
-//             datasets: stocks.map(stock => ({
-//                 label: stock.meta.symbol,
-//                 //"data" is iterating over values, then using parseFloat to change
-//                 //value.high into an integer 
-//                 data: stock.values.map(value => parseFloat(value.high)),
-//                 backgroundColor: getColor(stock.meta.symbol),
-//                 borderColor: getColor(stock.meta.symbol)
-//             }))
-//         }
-//     });
+    new Chart(highestPriceChartCanvas.getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: stock.meta.symbol,
+            datasets: stocks.map(stock => ({
+                label: stock.meta.symbol,
+                //"data" is iterating over values, then using parseFloat to change
+                //value.high into an integer 
+                data: stock.values.map(value => parseFloat(value.high)),
+                backgroundColor: getColor(stock.meta.symbol),
+                borderColor: getColor(stock.meta.symbol)
+            }))
+        }
+    });
 
 
 }
