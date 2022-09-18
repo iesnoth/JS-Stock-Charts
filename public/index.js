@@ -10,6 +10,47 @@ async function main() {
     const { GME, MSFT, DIS, BNTX } = mockData;
     const stocks = [GME, MSFT, DIS, BNTX];
     console.log(stocks)
+
+    //puts the dates in ascending order
+    stocks.forEach(stock => stock.value.reverse())
+    //  TIME CHART
+    new Chart(timeChartCanvas.getContext('2d'), {
+        type: 'line',
+        data: {
+            //the labels are taken from the fetched data, the const stocks above,
+            //the location of the stock in the index [0], then it accesses the "values" array
+            //we only want the datetime of each object, so values.map iterates over
+            //and makes a new array with only the datetime title thing
+            //NOT SURE I completely understand this. 
+            labels: stocks[0].values.map(value => value.datetime),
+            datasets: stocks.map(stock => ({
+                label: stock.meta.symbol,
+                //"data" is iterating over values, then using parseFloat to change
+                //value.high into an integer 
+                data: stock.values.map(value => parseFloat(value.high)),
+                backgroundColor: getColor(stock.meta.symbol),
+                borderColor: getColor(stock.meta.symbol)
+            }))
+        }
+    });
+
+
 }
+
+function getColor(stock) {
+    if (stock === "GME") {
+        return 'rgba(61, 161, 61, 0.7)'
+    }
+    if (stock === "MSFT") {
+        return 'rgba(209, 4, 25, 0.7)'
+    }
+    if (stock === "DIS") {
+        return 'rgba(18, 4, 209, 0.7)'
+    }
+    if (stock === "BNTX") {
+        return 'rgba(166, 43, 158, 0.7)'
+    }
+}
+
 
 main()
