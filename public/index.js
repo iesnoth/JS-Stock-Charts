@@ -37,19 +37,45 @@ async function main() {
     new Chart(highestPriceChartCanvas.getContext('2d'), {
         type: 'bar',
         data: {
-            labels: stock.meta.symbol,
+            //this isn't working
+            labels: stocks[0].meta.map(meta => meta.symbol),
             datasets: stocks.map(stock => ({
-                label: stock.meta.symbol,
-                //"data" is iterating over values, then using parseFloat to change
-                //value.high into an integer 
-                data: stock.values.map(value => parseFloat(value.high)),
-                backgroundColor: getColor(stock.meta.symbol),
-                borderColor: getColor(stock.meta.symbol)
+                label: 'Highest',
+                barPercentage: 0.5,
+                barThickness: 6,
+                maxBarThickness: 8,
+                minBarLength: 2,
+                data:getHighest(stock)
             }))
-        }
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                },
+                x: {
+
+                }
+            }
+        },
     });
 
 
+}
+
+
+
+//this does work, I've tested it, just not sure how to call it
+function getHighest(stock) {
+    arr = stock.values.map(value => parseFloat(value.high))
+    console.log(arr)
+    let i = 0
+    arr.forEach((element) => {
+        if (i < element) {
+          i = element;
+        }
+      });
+      console.log(i)
 }
 
 function getColor(stock) {
