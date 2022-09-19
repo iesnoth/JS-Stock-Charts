@@ -38,14 +38,13 @@ async function main() {
         type: 'bar',
         data: {
             //this isn't working
-            labels: stocks[0].meta.map(meta => meta.symbol),
+            labels: stock.meta.symbol,
             datasets: stocks.map(stock => ({
                 label: 'Highest',
-                barPercentage: 0.5,
                 barThickness: 6,
                 maxBarThickness: 8,
                 minBarLength: 2,
-                data:getHighest(stock)
+                data:getHighest(stock.values)
             }))
         },
         options: {
