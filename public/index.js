@@ -38,7 +38,7 @@ async function main() {
         type: 'bar',
         data: {
             //this isn't working
-            labels: stock.meta.symbol,
+            labels: stocks.meta.symbol,
             datasets: stocks.map(stock => ({
                 label: 'Highest',
                 barThickness: 6,
@@ -67,7 +67,6 @@ async function main() {
 //this does work, I've tested it, just not sure how to call it
 function getHighest(stock) {
     arr = stock.values.map(value => parseFloat(value.high))
-    console.log(arr)
     let i = 0
     arr.forEach((element) => {
         if (i < element) {
@@ -76,6 +75,7 @@ function getHighest(stock) {
       });
       console.log(i)
 }
+getHighest('GME')
 
 function getColor(stock) {
     if (stock === "GME") {
