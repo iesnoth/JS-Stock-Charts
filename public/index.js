@@ -43,8 +43,8 @@ async function main() {
             datasets: [
                 {
                     label: "Highest",
-                    backgroundColor: ['rgba(61, 161, 61, 0.7)','rgba(209, 4, 25, 0.7)','rgba(18, 4, 209, 0.7)','rgba(166, 43, 158, 0.7)'],
-                    data: [4,5,6,7]
+                    backgroundColor: ['rgba(61, 161, 61, 0.7)', 'rgba(209, 4, 25, 0.7)', 'rgba(18, 4, 209, 0.7)', 'rgba(166, 43, 158, 0.7)'],
+                    data: [4, 5, 6, 7]
 
                 }
             ]
@@ -59,10 +59,11 @@ async function main() {
 //choose the highest one of that array,
 //then put all those in an array,
 //and I need it to do it 4 times
+//possibly use a callback function to achieve all this at once
 
 function getHighest() {
     stocks.map(value => parseFloat(value.high))
-    console.log (arr)
+    console.log(arr)
     let i = 0
     arr.forEach((element) => {
         if (i < element) {
