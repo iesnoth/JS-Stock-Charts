@@ -23,6 +23,8 @@ async function main() {
             //and makes a new array with only the datetime title thing
             //NOT SURE I completely understand this. 
             labels: stocks[0].values.map(value => value.datetime),
+            //this singles out a single stock object, sorting all the info it needs,
+            //then puts that information into an array
             datasets: stocks.map(stock => ({
                 label: stock.meta.symbol,
                 //"data" is iterating over values, then using parseFloat to change
@@ -38,11 +40,14 @@ async function main() {
         type: 'bar',
         data: {
             labels: stocks.map(stock => stock.meta.symbol),
-            datasets: stocks.map(stock => ({
-                label: "Highest",
-                backgroundColor: ['red','blue','yellow','green'],
-                data: [2478, 5267, 734, 784]
-            }))
+            datasets: [
+                {
+                    label: "Highest",
+                    backgroundColor: ['rgba(61, 161, 61, 0.7)','rgba(209, 4, 25, 0.7)','rgba(18, 4, 209, 0.7)','rgba(166, 43, 158, 0.7)'],
+                    data: [4,5,6,7]
+
+                }
+            ]
         }
     });
 
@@ -50,9 +55,14 @@ async function main() {
 
 
 
-//not sure if this works. It did, then it didn't.
-function getHighest(stock) {
-    arr = stock.values.map(value => parseFloat(value.high))
+//I need this function to go through all the values of a stock
+//choose the highest one of that array,
+//then put all those in an array,
+//and I need it to do it 4 times
+
+function getHighest() {
+    stocks.map(value => parseFloat(value.high))
+    console.log (arr)
     let i = 0
     arr.forEach((element) => {
         if (i < element) {
@@ -61,7 +71,8 @@ function getHighest(stock) {
     });
     console.log(i)
 }
-//getHighest('GME')
+
+//console.log(getHighest())
 
 function getColor(stock) {
     if (stock === "GME") {
