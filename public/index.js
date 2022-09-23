@@ -37,26 +37,14 @@ async function main() {
     new Chart(highestPriceChartCanvas.getContext('2d'), {
         type: 'bar',
         data: {
-            //this isn't working
-            labels: stocks.meta.symbol,
+            labels: stocks.map(stock => stock.meta.symbol),
             datasets: stocks.map(stock => ({
-                label: 'Highest',
-                barThickness: 6,
-                data:getHighest(stock.values)
+                label: "Highest",
+                backgroundColor: ['red','blue','yellow','green'],
+                data: [2478, 5267, 734, 784]
             }))
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                },
-                x: {
-
-                }
-            }
-        },
+        }
     });
-
 
 }
 
@@ -68,12 +56,12 @@ function getHighest(stock) {
     let i = 0
     arr.forEach((element) => {
         if (i < element) {
-          i = element;
+            i = element;
         }
-      });
-      console.log(i)
+    });
+    console.log(i)
 }
-getHighest('GME')
+//getHighest('GME')
 
 function getColor(stock) {
     if (stock === "GME") {
