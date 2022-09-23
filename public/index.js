@@ -42,8 +42,6 @@ async function main() {
             datasets: stocks.map(stock => ({
                 label: 'Highest',
                 barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2,
                 data:getHighest(stock.values)
             }))
         },
@@ -64,7 +62,7 @@ async function main() {
 
 
 
-//this does work, I've tested it, just not sure how to call it
+//not sure if this works. It did, then it didn't.
 function getHighest(stock) {
     arr = stock.values.map(value => parseFloat(value.high))
     let i = 0
