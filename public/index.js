@@ -36,6 +36,7 @@ async function main() {
         }
     });
 
+    //BAR CHART
     new Chart(highestPriceChartCanvas.getContext('2d'), {
         type: 'bar',
         data: {
@@ -44,36 +45,28 @@ async function main() {
                 {
                     label: "Highest",
                     backgroundColor: ['rgba(61, 161, 61, 0.7)', 'rgba(209, 4, 25, 0.7)', 'rgba(18, 4, 209, 0.7)', 'rgba(166, 43, 158, 0.7)'],
-                    data: [4, 5, 6, 7]
+                    //I'm sure there's a better way to do this. I just couldn't figure it out.
+                    data: [highestValue(GME), highestValue(MSFT), highestValue(DIS), highestValue(BNTX)]
 
                 }
             ]
         }
     });
 
+    //gets the highest value of each stock
+    function highestValue(stock) {
+        let arr = stock.values.map(value => parseFloat(value.high))
+
+        let i = 0
+        arr.forEach((element) => {
+            if (i < element) {
+                i = element;
+            }
+        });
+        return i
+    }
+
 }
-
-
-
-//I need this function to go through all the values of a stock
-//choose the highest one of that array,
-//then put all those in an array,
-//and I need it to do it 4 times
-//possibly use a callback function to achieve all this at once
-
-function getHighest() {
-    stocks.map(value => parseFloat(value.high))
-    console.log(arr)
-    let i = 0
-    arr.forEach((element) => {
-        if (i < element) {
-            i = element;
-        }
-    });
-    console.log(i)
-}
-
-//console.log(getHighest())
 
 function getColor(stock) {
     if (stock === "GME") {
